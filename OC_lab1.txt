@@ -1,0 +1,76 @@
+1.
+#!/bin/bash
+a=something
+b=anything
+if [[ "$a" == "$b" ]]
+then echo "equal"
+else echo "unequal"
+fi
+
+2.
+#!/bin/bash
+if [[ "$1" > "$2" ]]
+then a=$1
+else a=$2
+fi
+if [[ "$a" > "$3" ]]
+then echo $a
+else echo $3
+fi
+
+3.
+#!/bin/bash
+#a -resul b - input
+a=""
+read b
+a ="$a $b"
+while [[ "$b" != "q" ]]
+do
+read b
+a="$a $b"
+done
+echo "$a"
+
+4.
+#!/bin/bash
+counter=1
+read a
+while [[ $(($a%2)) != 0 ]]
+do
+read a
+let counter="$counter"+1
+done
+echo "$counter"
+
+5.
+#!/bin/bash
+echo "Choose your path"
+echo "1 - nano"
+echo "2 - vi"
+echo "3 - links"
+echo "4 - exit"
+read a
+case $a in
+1)
+/usr/bin/nano
+;;
+2)
+/usr/bin/vim
+;;
+3)
+/usr/bin/links
+;;
+4)
+echo "You exited"
+exit 0
+
+6.
+#!/bin/bash
+if [[ "$HOME" = "PWD" ]]
+then 
+echo "$HOME"
+exit 0
+else
+echo "ERROR"
+exit 1
+fi
