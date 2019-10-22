@@ -1,0 +1,38 @@
+1.
+#!/bin/bash
+grep -E -r -h -s "^ACPI.*" /var/log > errors.log
+grep -r -h "(/[a-zA-Z0-9]+)+\.[a-zA-Z]+" /home/user/Lab2/errors.log
+
+2.
+#!/bin/bash
+inf="\(II\)"
+war="\(WW\)"
+grep $war /var/log/Xorg.0.log | sed -E "s/$war/Warning: /" > full.log
+grep $inf /var/log/Xorg.0.log | sed -E "s/$inf/Information: /" >> full.log
+
+3.
+#!/bin/bash
+mail="[a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\\.[a-zA-Z]+)+"
+grep -E -h -s -o -w $mail /etc/* | awk '{printf("%s\n",$1)}' > emails.lst
+
+4.
+#!/bin/bash
+file /bin/* | grep ' script' | awk -F':' '{print $1}' |
+xargs -n 1 head -n 1 | sort |
+uniq -c | sort -rn
+
+5.
+#!/bin/bash
+awk '{ FS= ":"; print $3,":", $1;}' /etc/passwd | sort -n -k1
+
+6.
+#!/bin/bash
+cat -s /var/log/*.log | wc -l
+
+7.
+#!/bin/bash
+man bash|
+tr -s '[:space:]' '\n' | tr -dc '[:alnum:]\n\r' | tr '[:upper:]' '[:lower:]' |
+sort | uniq -c | sort -n -r |
+awk -f' ' '{if (length($2} >= 4) print $1 $2'} |
+head -3
