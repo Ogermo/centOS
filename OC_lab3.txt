@@ -1,0 +1,24 @@
+1.
+#!/bin/bash
+ps -U user -o pid,command | tail -n +2 | awk '{print } END{print NR}'
+
+2.
+#!/bin/bash
+ps -Ao pid,stime | head -n 2 | tail -n 1 | awk '{print $1}'
+
+3.
+#!/bin/bash
+ps -Ao pid,cmd | grep "/sbin/" | head -n -1 | awk '{print $1}' > ans3.tmp
+
+4.
+#!/bin/bash
+ps -Ao pid | tail -n +2 |
+awk '{ file ="/proc/"$1"/statm";getline line<file: close (file); split (line, a); print $1, ":" , a[2]-a[3]'|
+sort -r -n -t ":" -k2 > ans4.tmp
+
+5.
+#!/bin/bash
+
+
+6.
+#!/bin/bash
